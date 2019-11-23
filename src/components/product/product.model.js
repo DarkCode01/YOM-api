@@ -7,12 +7,12 @@ const { Schema, model, SchemaTypes } = require('mongoose');
 
 const ProductSchema = new Schema(
     {
-        nomArt: {
+        name: {
             type: String,
             required: [true, 'hey bro, write the name of this product!'],
             default: ''
         },
-        descripcion: {
+        description: {
             type: String,
             required: true,
             default: ''
@@ -22,22 +22,26 @@ const ProductSchema = new Schema(
             ref: 'Image',
             validateExistance: true
         }],
-        precio: {
+        prace: {
             type: Number,
             required: true,
             default: 0.00
         },
-        ctg: {
-            type: String,
-            required: true,
-            default: 'all'
-        },
+        category: [{
+            type: SchemaTypes.ObjectId,
+            validateExistance: true,
+        }],
         saler: {
             type: SchemaTypes.ObjectId,
             ref: 'Account',
             validateExistance: true,
-            required: [true, 'this product need it a saler!'],
-            default: ''
+            required: [true, 'this product need it a saler!']
+        },
+        market: {
+            type: SchemaTypes.ObjectId,
+            ref: 'Market',
+            validateExistance: true,
+            required: [true, 'this product need it a market!']
         }
     },
     { versionKey: false }

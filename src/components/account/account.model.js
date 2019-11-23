@@ -37,7 +37,19 @@ const AccountSchema = new Schema({
         required: true,
         default: false
     },
-    products: [{
+    manage: {
+        type: SchemaTypes.ObjectId,
+        ref: 'Account',
+        validateExistance: true,
+        default: null
+    },
+    employed: {
+        type: SchemaTypes.ObjectId,
+        ref: 'Market',
+        validateExistance: true,
+        default: null
+    },
+    products_published: [{
         type: SchemaTypes.ObjectId,
         ref: 'Product',
         validateExistance: true,
