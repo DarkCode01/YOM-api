@@ -1,6 +1,6 @@
 const createError = require('http-errors');
-const { Account } = require('../models');
-const { createPayload, generateToken } = require('../utils/authentication');
+const Account = require('../account/account.provider').model;
+const { createPayload, generateToken } = require('./auth.utils');
 
 
 exports.getTokens = async (req, res, next) => {

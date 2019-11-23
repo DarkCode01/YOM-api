@@ -4,8 +4,11 @@ const cors = require('cors');
 const logger = require('morgan');
 const createError = require('http-errors');
 const env = require('dotenv').config();
-const routes = require('./routes');
-const passport = require('./middlewares/passport.middleware');
+// const routes = require('./routes');
+const passport = require('./components/core/core.controllers');
+
+// Components
+const AuthComponent = require('./components/auth/auth.provider');
 
 // App
 const app = express();
@@ -19,9 +22,9 @@ app.use(passport.initialize());
 
 
 // routes
-app.use(`/api/v${process.env.VERSION_API_REST}`, routes.auth);
-app.use(`/api/v${process.env.VERSION_API_REST}`, routes.account);
-app.use(`/api/v${process.env.VERSION_API_REST}`, routes.product);
+app.use(`/api/v${process.env.VERSION_API_REST}`, AuthComponent.routes);
+// app.use(`/api/v${process.env.VERSION_API_REST}`, routes.account);
+// app.use(`/api/v${process.env.VERSION_API_REST}`, routes.product);
 
 // Catch of errors
 app.use((req, res, next) => {

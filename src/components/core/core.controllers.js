@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs');
 const createError = require('http-errors');
 const passport = require('passport');
-const { Account } = require('../models');
-const { SECRET_KEY_API } = require('../utils/authentication');
+const Account = require('../account/account.provider').model;
+const { SECRET_KEY_API } = require('../auth/auth.provider').utils;
 
 const localStrategy = require('passport-local').Strategy;
 const { ExtractJwt, Strategy } = require('passport-jwt');

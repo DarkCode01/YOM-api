@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Account } = require('../models');
+const Account = require('./account.model');
 const createError = require('http-errors');
 const passport = require('passport');
 

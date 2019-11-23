@@ -1,6 +1,5 @@
 const { Schema, model, SchemaTypes } = require('mongoose');
-const { createHashPassword } = require('../utils/password');
-const { generateURLGravatarOfAccount } = require('../utils/account');
+const { createHashPassword, generateURLGravatarOfAccount } = require('./account.utils');
 
 
 const AccountSchema = new Schema({
