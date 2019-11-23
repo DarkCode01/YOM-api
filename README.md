@@ -1,33 +1,24 @@
-### La estructura que se uso para este projecto es para mantener ordenado los diferentes modulos.
+## YOM - API  🚀⚙️
 
-* > `controllers/` -> Encargados de procesar la peticion.
-* > `models/` -> Los modelos.
-* > `routes/` -> Configurar las rutas
-* > `middlewares/` -> Configurar procesos que se ejecutaran antes de los controllers.
-* > `utils/` -> Funciones que se usaran con frecuencia...
-* > `tmp/` -> para almacenar de forma temporal las imagenes subidas.
+**YOM - API** pryecto que surge para brindar soporte y poder gestionar la información de **Your Own Market**.
 
-> Al momento de crear un modulo o archivo nuevo, se debera de colocar el folder a que pertenece y seguido de la extension ej: `auth.controller.js` > este archivo hira dentro de la carpeta `controller`.
+Este proyecto esta trabajado bajo `componentes`, es decir cada parte de la `API` esta dividad en pequeños `componentes` para poder hacer mas legible y escalable el proyecto a futuros cambios o nuevas funcionalidades.
 
-> **Esto se hizo para mejorar la estructura del projecto como tal.**
-
-<br />
-<br />
+El proyecto contiene un `componente` que es unico el cual es `core` el cual contiene las funcionalidades mas genericas de la `API`, tales como, `services`, `query-builders`, `errors-handlers`...
 
 
-En el archivo `.env.example` estan definidas las variables de entorno que se utiliza en `dev` es decir en el ambiente de desarrollo.
+[![Dependencies](https://img.shields.io/david/ant-design/ant-design.svg?style=flat-square)](https://david-dm.org/ant-design/ant-design) [![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design.svg?style=flat-square)](https://david-dm.org/ant-design/ant-design?type=dev)
 
---
-Pasos para correr el proyecto de la API REST.
 
-```shell
-# instalar las dependencias
-> npm install
 
-# crear el archivo `.env` para las variables de entorno
-# ojo, para saber que variables crear leer el archivo `.env.example`
-> cat .env.example > .env
 
-# correr el proyecto && listo.
-> npm run dev
-```
+## Contribuciones 💻
+Cualquier `Pull Request` son bienvenidos, siempre y cuando esten bien `documentadas 📝` y `testeadas 🧪`.
+
+Cualquier reporte de errores, puedes abrir un `Issues 🐛` en este repo y con gusto estaremos resolviendo lo.
+
+
+## Pull-eros
+
+* [Devrax](https://github.com/Devrax)
+* [Samuel De La Cruz](https://github.com/samueldlacruz)
