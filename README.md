@@ -7,10 +7,6 @@ Este proyecto esta trabajado bajo `componentes`, es decir cada parte de la `API`
 El proyecto contiene un `componente` que es unico el cual es `core` el cual contiene las funcionalidades mas genericas de la `API`, tales como, `services`, `query-builders`, `errors-handlers`...
 
 
-[![Dependencies](https://img.shields.io/david/ant-design/ant-design.svg?style=flat-square)](https://david-dm.org/ant-design/ant-design) [![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design.svg?style=flat-square)](https://david-dm.org/ant-design/ant-design?type=dev)
-
-
-
 
 ## Contribuciones 💻
 Cualquier `Pull Request` son bienvenidos, siempre y cuando esten bien `documentadas 📝` y `testeadas 🧪`.
