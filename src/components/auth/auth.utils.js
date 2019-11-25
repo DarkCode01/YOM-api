@@ -1,7 +1,8 @@
+const config = require('../../../config');
 const jwt = require('jsonwebtoken');
 
 
-exports.SECRET_KEY_API = process.env.SECRET_KEY;
+exports.SECRET_KEY_API = config.SECRET_KEY;
 
 exports.getExpiredIn = (type) => {
     switch(type) {

@@ -10,11 +10,11 @@ exports.upload = multer({
     dest: './.tmp',
     limits: 1000000,
     fileFilter: (req, file, next) => {
-        if (MIME_TYPES.includes(file.mimetype)) {
+        if (!MIME_TYPES.includes(file.mimetype)) {
             return next(createError(400, 'Only .png, .jpg and .jpeg format allowed!'));
         }
 
-        return next(false);
+        return next(null, true);
     } 
 });
 

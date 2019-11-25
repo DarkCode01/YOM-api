@@ -22,7 +22,7 @@ const ProductSchema = new Schema(
             ref: 'Image',
             validateExistance: true
         }],
-        prace: {
+        price: {
             type: Number,
             required: true,
             default: 0.00
@@ -30,6 +30,7 @@ const ProductSchema = new Schema(
         category: [{
             type: SchemaTypes.ObjectId,
             validateExistance: true,
+            default: null
         }],
         saler: {
             type: SchemaTypes.ObjectId,
@@ -41,7 +42,8 @@ const ProductSchema = new Schema(
             type: SchemaTypes.ObjectId,
             ref: 'Market',
             validateExistance: true,
-            required: [true, 'this product need it a market!']
+            required: false,
+            default: null
         }
     },
     { versionKey: false }

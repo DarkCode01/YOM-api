@@ -1,10 +1,11 @@
 {
-  "name": "server",
+  "name": "YOM-api",
   "version": "1.0.0",
-  "description": "The server connects the client with the database",
+  "description": "Api Rest to manage all data of [YOM] market place. ",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/Devrax/YOM#readme",
   "dependencies": {
+    "@babel/cli": "^7.7.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.16.0",
@@ -30,6 +32,7 @@
     "crypto-js": "^3.1.9-1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "mime-types": "^2.1.24",
@@ -43,6 +46,10 @@
     "shelljs": "^0.8.3"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "babel-preset-env": "^1.7.0",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "superagent": "^5.1.1",
+    "supertest": "^4.0.2"
   }
 }

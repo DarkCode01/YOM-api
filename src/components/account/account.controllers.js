@@ -1,15 +1,7 @@
 const { Router } = require('express');
 const Account = require('./account.model');
 const createError = require('http-errors');
-const passport = require('passport');
 
-const router = Router();
-
-/** 
- * TODO: Crear la cuenta del usuario.
- * TODO: Enviar un email al usuario para verificar la cuenta de email.
- * 
-*/
 
 exports.getAccounts = async (req, res, next) => {
     try {

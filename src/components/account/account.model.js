@@ -53,7 +53,7 @@ const AccountSchema = new Schema({
         type: SchemaTypes.ObjectId,
         ref: 'Product',
         validateExistance: true,
-        default: ''
+        default: null
     }]
 });
 

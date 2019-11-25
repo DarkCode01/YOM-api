@@ -1,10 +1,11 @@
 const fs = require('fs');
 const createError = require('http-errors');
-const mongoose = require('mongoose');
+
 const CoreComponent = require('../core/core.provider');
+const ImageComponent = require('../image/image.provider');
+
 const Product = require('./product.model');
 
-const { cloudinary } = CoreComponent.services;
 
 exports.getProductByObjectId = async (req, res, next) => {
     try {
@@ -36,28 +37,34 @@ exports.createProduct = async (req, res, next) => {
         let uploades = [];
 
         for (let image of req.files) {
-            const uploaded = await cloudinary.uploader.upload(image.path);
+            const uploaded = await CoreComponent.services.cloudinary.uploader.upload(image.path);
             const deleted = fs.unlinkSync(image.path);
-            
-            uploades.push(uploaded.secure_url || uploaded.url);
-        }
+            const Image = new ImageComponent.model({
+                public_id: uploaded.public_id,
+                format: uploaded.format,
+                url: uploaded.url,
+                secure_url: uploaded.secure_url
+            });
+            const imageData = await Image.save();
 
+            uploades.push(imageData._id);
+        }
+ 
         // Create product...
         const product = new Product({
             saler: req.user._id,
-            nomArt: req.body.nomArt,
-            descripcion: req.body.description,
+            name: req.body.name,
+            description: req.body.description,
             images: uploades,
-            precio: Number(req.body.precio), 
-            ctg: req.body.ctg
+            price: Number(req.body.price)
         });
 
-        res.status(201);;
+        res.status(201);
         res.json({
             data: await product.save()
         });
     } catch(err) {
-        return next(createError(500));
+        return next(createError(500, err.message));
     }
 }
 

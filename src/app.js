@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const logger = require('morgan');
 const createError = require('http-errors');
-const env = require('dotenv').config();
 // const routes = require('./routes');
 const passport = require('./components/core/core.controllers');
 
 // Components
 const AuthComponent = require('./components/auth/auth.provider');
+const AccountComponent = require('./components/account/account.provider');
+const ProductComponent = require('./components/product/product.provider');
 
 // App
 const app = express();
@@ -22,9 +23,9 @@ app.use(passport.initialize());
 
 
 // routes
-app.use(`/api/v${process.env.VERSION_API_REST}`, AuthComponent.routes);
-// app.use(`/api/v${process.env.VERSION_API_REST}`, routes.account);
-// app.use(`/api/v${process.env.VERSION_API_REST}`, routes.product);
+app.use(`/api`, AuthComponent.routes);
+app.use(`/api`, AccountComponent.routes);
+app.use(`/api`, ProductComponent.routes);
 
 // Catch of errors
 app.use((req, res, next) => {

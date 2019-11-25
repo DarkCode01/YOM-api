@@ -6,7 +6,7 @@ const router = Router();
 
 
 router
-    .get('/accounts', controllers.getAccounts)
+    .get('/accounts', passport.authenticate('authenticate', { session: false }), controllers.getAccounts)
     .post('/accounts', controllers.createAccount);
 
 

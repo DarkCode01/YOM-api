@@ -68,13 +68,13 @@ passport.use('refresh', new Strategy(
 
 passport.use('verify', new Strategy(
     {
-        jwtFromRequest: ExtractJwt.fromBodyField('token'),
+        jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
         secretOrKey: SECRET_KEY_API
     },
     (payload, next) => {
         return next(false, payload);
     }
-))
+));
 
 
 module.exports = passport;
