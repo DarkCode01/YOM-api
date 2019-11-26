@@ -1,15 +1,17 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const logger = require('morgan');
 const createError = require('http-errors');
-// const routes = require('./routes');
-const passport = require('./components/core/core.controllers');
+const swagger = require('swagger-ui-express');
 
 // Components
+const CoreComponent = require('./components/core/core.provider');
 const AuthComponent = require('./components/auth/auth.provider');
 const AccountComponent = require('./components/account/account.provider');
 const ProductComponent = require('./components/product/product.provider');
+
+// other
+const swaggerSpecs = require('../config/swagger.js');
 
 // App
 const app = express();
@@ -19,13 +21,14 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(passport.initialize());
+app.use(CoreComponent.controllers.initialize());
 
 
 // routes
-app.use(`/api`, AuthComponent.routes);
-app.use(`/api`, AccountComponent.routes);
-app.use(`/api`, ProductComponent.routes);
+app.use('/api', AuthComponent.routes);
+app.use('/api', AccountComponent.routes);
+app.use('/api', ProductComponent.routes);
+app.use('/api/doc', swagger.serve, swagger.setup(swaggerSpecs));
 
 // Catch of errors
 app.use((req, res, next) => {

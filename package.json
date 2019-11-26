@@ -33,6 +33,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
+    "js-yaml": "^3.13.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "mime-types": "^2.1.24",
@@ -43,7 +44,8 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "resize-optimize-images": "^1.1.0",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.3",
+    "swagger-ui-express": "^4.1.2"
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0",

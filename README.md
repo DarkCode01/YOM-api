@@ -6,6 +6,8 @@ Este proyecto esta trabajado bajo `componentes`, es decir cada parte de la `API`
 
 El proyecto contiene un `componente` que es unico el cual es `core` el cual contiene las funcionalidades mas genericas de la `API`, tales como, `services`, `query-builders`, `errors-handlers`...
 
+[![Dependency Status](https://david-dm.org/darkcode01/YOM-api.svg)](https://david-dm.org/darkcode01/YOM-api/) [![devDependency Status](https://david-dm.org/darkcode01/YOM-api/dev-status.svg)](https://david-dm.org/darkcode01/YOM-api#info=devDependencies)
+
 
 
 ## Contribuciones 💻

@@ -1,0 +1,85 @@
+swagger: "2.0"
+info:
+  description: Api REST para manejar los datos de YOM project.
+  version: "1.0.0"
+  title: YOM - API
+basePath: "/api"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /auth/token:
+    post:
+      tags:
+        - "Authorization"
+      summary: "Obtener los token por medio de las credenciales del usuario."
+      operationId: "token_access"
+      produces:
+        - "application/json"
+      parameters:
+        - name: email
+          description: Email de la cuenta.
+          in: body
+          required: true
+          type: string
+        - name: password
+          description: Password de la cuenta.
+          in: body
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Los datos son correctos."
+          schema:
+            type: object
+            properties:
+              refresh:
+                type: string
+              access:
+                type: string
+        400:
+          description: "Son parametros no fueron enviados."
+        401:
+          description: "El Email / passowrd son incorrectos."
+  /auth/refresh:
+    post:
+      tags:
+        - "Authorization"
+      summary: Para actualizar el token_access por medio del refresh token.
+      operationId: "token_refresh"
+      produces:
+        - "application/json"
+      parameters:
+        - name: access
+          description: Refresh token para la actualizacón del access token.
+          in: body
+          required: true
+      responses:
+        200:
+          description: Se actualizo de forma correcta el access token.
+          schema:
+            type: object
+            properties:
+              access:
+                type: string
+        400:
+          description: Error al intentar actualizar el token.
+  /auth/verify:
+    post:
+      tags:
+        - "Authorization"
+      summary: Para verificar si el access token es válido..
+      operationId: "token_access_verify"
+      produces:
+        - "application/json"
+      parameters:
+        - name: access
+          description: Token access para la verificaión.
+          in: body
+          required: true
+          type: string
+      responses:
+        200:
+          description: Se verifico de forma correcta el access token.
+
+
