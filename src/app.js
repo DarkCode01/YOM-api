@@ -27,7 +27,7 @@ app.use(CoreComponent.controllers.initialize());
 // routes
 app.use('/api', AuthComponent.routes);
 app.use('/api', AccountComponent.routes);
-app.use('/api', ProductComponent.routes);
+// app.use('/api', ProductComponent.routes);
 app.use('/api/doc', swagger.serve, swagger.setup(swaggerSpecs));
 
 // Catch of errors
