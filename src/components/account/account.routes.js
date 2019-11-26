@@ -10,7 +10,8 @@ const passport = require('passport');
 
 const utils = require('./account.utils');
 const controllers = require('./account.controllers');
-const middlewares = require('./account.middlewares');
+
+const CoreComponent = require('../core/core.provider');
 
 const router = Router();
 
@@ -22,7 +23,11 @@ const router = Router();
  * @apiSuccess (200) { count, accounts } Result of all accounts.
  * @apiError (500) {object} Internal server error.
  */
-router.get('/accounts', passport.authenticate('authenticate', { session: false }), controllers.getAccounts);
+router.get(
+    '/accounts',
+    passport.authenticate('authenticate', { session: false }),
+    controllers.getAccounts
+);
 
 /**
  * @api {GET} /api/accounts/:objectID Get info Account by Object ID
@@ -37,8 +42,8 @@ router.get('/accounts', passport.authenticate('authenticate', { session: false }
 router.get(
     '/accounts/:objectID',
     passport.authenticate('authenticate', { session: false }),
-    utils.validator('params'),
-    middlewares.validate,
+    CoreComponent.utils.validators,
+    CoreComponent.middlewares.validate,
     controllers.getInfoAccount
 );
 
@@ -60,8 +65,8 @@ router.get(
  */
 router.post(
     '/accounts',
-    utils.validator('body'),
-    middlewares.validate,
+    utils.bodyValidator,
+    CoreComponent.middlewares.validate,
     controllers.createAccount
 );
 
@@ -78,8 +83,8 @@ router.post(
  */
 router.patch('/accounts/:objectID',
     passport.authenticate('authenticate', { session: false }),
-    utils.validator('params'),
-    middlewares.validate,
+    // utils.validator('params'),
+    // middlewares.validate,
     controllers.desactivateAccount
 );
 

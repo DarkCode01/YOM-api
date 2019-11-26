@@ -7,6 +7,5 @@ module.exports = {
     middlewares: middlewares,
     services: services,
     controllers: controllers,
-    utils: utils,
-    d: "sdadas"
+    utils: utils
 }

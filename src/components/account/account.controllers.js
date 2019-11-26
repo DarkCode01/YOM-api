@@ -8,8 +8,10 @@
  * @since  26.11.19
  */
 
-const Account = require('./account.model');
 const createError = require('http-errors');
+const Account = require('./account.model');
+
+const CoreComponent = require('../core/core.provider');
 
 
 exports.getAccounts = async (req, res, next) => {
@@ -63,9 +65,5 @@ exports.createAccount = async (req, res, next) => {
 }
 
 exports.desactivateAccount = async (req, res, next) => {
-    try {
-        console.log(req.user);
-    } catch(err) {
-        return next(createError(500), err.message);
-    }
+    // TODO: Desactivate Account of user.
 }

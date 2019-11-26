@@ -5,9 +5,9 @@ const createError = require('http-errors');
 const swagger = require('swagger-ui-express');
 
 // Components
-const CoreComponent = require('./components/core/core.provider');
 const AuthComponent = require('./components/auth/auth.provider');
 const AccountComponent = require('./components/account/account.provider');
+const CoreComponent = require('./components/core/core.provider');
 const ProductComponent = require('./components/product/product.provider');
 
 // other
@@ -16,12 +16,11 @@ const swaggerSpecs = require('../config/swagger.js');
 // App
 const app = express();
 
-// settings...
-app.use(cors());
+// settings...app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(CoreComponent.controllers.initialize());
+app.use(AuthComponent.middlewares.initialize());
 
 
 // routes

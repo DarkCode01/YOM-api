@@ -5,9 +5,18 @@
  * @since  26.11.19
  */
 
-const { body } = require('express-validator');
+const fs = require('fs');
+const hbs = require('handlebars');
+const { param } = require('express-validator');
 
+/** Validators of query params */
 exports.validators = [
-    body('objectID')
+    param('objectID')
         .isMongoId()
 ];
+
+exports.getTemplate = ({ filename }) => {
+    const html = fs.readFileSync(`./src/templates/${filename}.hbs`, 'utf8');
+
+    return hbs.compile(html)();
+}

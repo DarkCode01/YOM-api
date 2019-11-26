@@ -52,44 +52,34 @@ exports.createHashPassword = password => {
  * 
  * @return {array} validators.
  */
-exports.validator = (type='params') => {
-    switch(type) {
-        case 'body':
-            return [
-                body('username')
-                    .isAlphanumeric()
-                    .isLength({ min: 4, max: 30 })
-                    .withMessage('The characters of username is min: 4, max: 30'),
-                body('firts_name')
-                    .isString()
-                    .matches(/^[a-zA-Z]/)
-                    .withMessage('Only contain letters.')
-                    .isLength({ min: 4, max: 30 })
-                    .withMessage('The characters of firts name is min: 4, max: 30'),
-                body('last_name')
-                    .isString()
-                    .matches(/^[a-zA-Z]/)
-                    .withMessage('Only contain letters.')
-                    .isLength({ min: 4, max: 50 })
-                    .withMessage('The characters of last name is min: 4, max: 30'),
-                body('email')
-                    .isEmail()
-                    .withMessage('The email supplied is invalid.'),
-                body('password')
-                    .isAlphanumeric()
-                    .isLength({ min: 8, max: 50 })
-                    .withMessage('They must be at least 8 characters minimum.')
-                    .matches(/^[a-zA-Z0-9]{3,30}$/)
-                    .withMessage('The password must have lyrics and numbers.'),
-                body('market_id')
-                    .isMongoId()
-                    .withMessage('The market supplied not exist.')
-                    .optional()
-            ];
-        default:
-            return [
-                body('objectID')
-                    .isMongoId()
-            ];
-    }
-}
+exports.bodyValidator = [
+    body('username')
+        .isAlphanumeric()
+        .isLength({ min: 4, max: 30 })
+        .withMessage('The characters of username is min: 4, max: 30'),
+    body('firts_name')
+        .isString()
+        .matches(/^[a-zA-Z]/)
+        .withMessage('Only contain letters.')
+        .isLength({ min: 4, max: 30 })
+        .withMessage('The characters of firts name is min: 4, max: 30'),
+    body('last_name')
+        .isString()
+        .matches(/^[a-zA-Z]/)
+        .withMessage('Only contain letters.')
+        .isLength({ min: 4, max: 50 })
+        .withMessage('The characters of last name is min: 4, max: 30'),
+    body('email')
+        .isEmail()
+        .withMessage('The email supplied is invalid.'),
+    body('password')
+        .isAlphanumeric()
+        .isLength({ min: 8, max: 50 })
+        .withMessage('They must be at least 8 characters minimum.')
+        .matches(/^[a-zA-Z0-9]{3,30}$/)
+        .withMessage('The password must have lyrics and numbers.'),
+    body('market_id')
+        .isMongoId()
+        .withMessage('The market supplied not exist.')
+        .optional()
+];
