@@ -65,14 +65,37 @@ router.get(
  */
 router.post(
     '/accounts',
-    utils.bodyValidator,
+    utils.bodyValidatorToUpdate,
     CoreComponent.middlewares.validate,
     controllers.createAccount
 );
 
 /**
- * @api {POST} /api/accounts Desactivate Account.
- * @apiName desactivateAccount
+ * @api {POST} /api/accounts Update Account
+ * @apiName updateAccount
+ * @apiGroup Account
+ *
+ * @apiParam {String} [username]
+ * @apiParam {string} [firts_name]
+ * @apiParam {string} [last_name]
+ * @apiParam {string} [email]
+ * 
+ * @apiSuccess (200) object Info of `Account` updated.
+ * @apiError (400) {object} Error on body params.
+ * @apiError (500) {object} Internal server error.
+ */
+router.patch(
+    '/accounts/:objectID',
+    passport.authenticate('authenticate', { session: false }),
+    CoreComponent.middlewares.validateAccount,
+    utils.bodyValidatorToUpdate,
+    CoreComponent.middlewares.validate,
+    controllers.updateAccount
+);
+
+/**
+ * @api {POST} /api/accounts Manage Status of account (Active / Inactive).
+ * @apiName statusAccount
  * @apiGroup Account
  *
  * @apiParam {string} [objectID] ObjectID is the id of mongoose.
@@ -81,11 +104,12 @@ router.post(
  * @apiError (400) {object} Error on body params.
  * @apiError (500) {object} Internal server error.
  */
-router.patch('/accounts/:objectID',
+router.patch('/accounts/:objectID/status',
     passport.authenticate('authenticate', { session: false }),
-    // utils.validator('params'),
-    // middlewares.validate,
-    controllers.desactivateAccount
+    CoreComponent.middlewares.validateAccount,
+    CoreComponent.utils.validators,
+    CoreComponent.middlewares.validate,
+    controllers.statusAccount
 );
 
 module.exports = router;

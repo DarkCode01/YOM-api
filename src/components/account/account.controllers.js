@@ -64,6 +64,41 @@ exports.createAccount = async (req, res, next) => {
     }
 }
 
-exports.desactivateAccount = async (req, res, next) => {
-    // TODO: Desactivate Account of user.
+exports.statusAccount = async (req, res, next) => {
+    try {
+        const account = await Account.findById(req.params.objectID);
+        await Account.updateOne(
+            { _id: req.user._id },
+            { is_active: !account.is_active }
+        );
+
+        res.status(200);
+        res.json({
+            account: {
+                ...account._doc,
+                is_active: !account.is_active
+            }
+        });
+    } catch(err) {
+        return next(createError(500, err.message));
+    }
+}
+
+exports.updateAccount = async (req, res, next) => {
+    try {
+        const account = await Account.findByIdAndUpdate(
+            req.user._id,
+            { ...req.body }
+        );
+
+        res.status(200);
+        res.json({
+            account: {
+                ...account._doc,
+                ...req.body
+            }
+        });
+    } catch(err) {
+        return next(createError(400, err.message));
+    }
 }

@@ -11,6 +11,7 @@ const { body, param } = require('express-validator');
 
 const config = require('../../../config');
 
+
 /**
  * Summary. (Generator of gravatar URL)
  * 
@@ -52,26 +53,34 @@ exports.createHashPassword = password => {
  * 
  * @return {array} validators.
  */
-exports.bodyValidator = [
+exports.bodyValidatorToUpdate = [
     body('username')
         .isAlphanumeric()
         .isLength({ min: 4, max: 30 })
-        .withMessage('The characters of username is min: 4, max: 30'),
+        .withMessage('The characters of username is min: 4, max: 30')
+        .optional(),
     body('firts_name')
         .isString()
         .matches(/^[a-zA-Z]/)
         .withMessage('Only contain letters.')
         .isLength({ min: 4, max: 30 })
-        .withMessage('The characters of firts name is min: 4, max: 30'),
+        .withMessage('The characters of firts name is min: 4, max: 30')
+        .optional(),
     body('last_name')
         .isString()
         .matches(/^[a-zA-Z]/)
         .withMessage('Only contain letters.')
         .isLength({ min: 4, max: 50 })
-        .withMessage('The characters of last name is min: 4, max: 30'),
+        .withMessage('The characters of last name is min: 4, max: 30')
+        .optional(),
     body('email')
         .isEmail()
-        .withMessage('The email supplied is invalid.'),
+        .withMessage('The email supplied is invalid.')
+        .optional()
+];
+
+exports.bodyValidatorToCreate = [
+    ...this.bodyValidatorToUpdate,
     body('password')
         .isAlphanumeric()
         .isLength({ min: 8, max: 50 })

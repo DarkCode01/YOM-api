@@ -10,7 +10,8 @@ const AccountSchema = new Schema({
     username: {
         type: String,
         required: [true, 'hey yo, u need a username bro!'],
-        unique: true
+        unique: true,
+        default: ''
     },
     firts_name: {
         type: String,

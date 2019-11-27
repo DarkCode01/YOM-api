@@ -19,6 +19,11 @@ passport.use('login', new localStrategy(
             const isValidPassword = bcrypt.compareSync(password, account.password);
 
             if (account && isValidPassword) {
+                if (!account.status) await Account.updateOne(
+                    { _id: account._id },
+                    { is_active: true }
+                );
+                
                 return next(null, account);
             }
 

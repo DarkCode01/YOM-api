@@ -9,11 +9,6 @@ const createError = require('http-errors');
 const { validationResult } = require('express-validator');
 
 exports.validate = async (req, res, next) => {
-    /**
-     * [To handle error on body param validator.]
-     *
-     * @return  { object } middleware.
-     */
     try {
         const errors = validationResult(req);
 
@@ -23,4 +18,12 @@ exports.validate = async (req, res, next) => {
     } catch(err) {
         return next(createError(500, err.message));
     }
+}
+
+exports.validateAccount = async (req, res, next) => {
+    if (req.user._id === req.params.objectID) {
+        return next();
+    }
+
+    return next(createError(401));
 }
