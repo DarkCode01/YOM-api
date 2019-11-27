@@ -17,8 +17,8 @@
     "morgan",
     "cors"
   ],
-  "author": "Manuel Guzman",
-  "license": "ISC",
+  "author": "Jose Segura (Darkcoder)",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Devrax/YOM/issues"
   },

@@ -11,7 +11,7 @@ const CoreComponent = require('./components/core/core.provider');
 const ProductComponent = require('./components/product/product.provider');
 
 // other
-const swaggerSpecs = require('../config/swagger.js');
+const openApi = require('../config/openApi.js');
 
 // App
 const app = express();
@@ -27,7 +27,7 @@ app.use(AuthComponent.middlewares.initialize());
 app.use('/api', AuthComponent.routes);
 app.use('/api', AccountComponent.routes);
 // app.use('/api', ProductComponent.routes);
-app.use('/api/doc', swagger.serve, swagger.setup(swaggerSpecs));
+app.use('/api/doc', swagger.serve, swagger.setup(openApi));
 
 // Catch of errors
 app.use((req, res, next) => {
