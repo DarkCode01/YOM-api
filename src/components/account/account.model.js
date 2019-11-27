@@ -10,7 +10,8 @@ const AccountSchema = new Schema({
     username: {
         type: String,
         required: [true, 'hey yo, u need a username bro!'],
-        unique: true
+        unique: true,
+        default: ''
     },
     firts_name: {
         type: String,
@@ -32,14 +33,22 @@ const AccountSchema = new Schema({
         set: createHashPassword,
         default: ''
     },
+    type: {
+        type: String,
+        enum: [ 'creator', 'employee' ],
+        default: 'creator'
+    },
     email_confirmed: {
         type: Boolean,
-        required: true,
         default: false
     },
-    manage: {
+    is_active: {
+        type: Boolean,
+        default: false
+    },
+    manager: {
         type: SchemaTypes.ObjectId,
-        ref: 'Account',
+        ref: 'Market',
         validateExistance: true,
         default: null
     },

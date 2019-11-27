@@ -7,7 +7,8 @@ module.exports = {
         await mongoose.connect(config.MONGODB_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            useCreateIndex: true
+            useCreateIndex: true,
+            useFindAndModify: true
         });
     },
     disconnect: async (done) => {

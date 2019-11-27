@@ -1,5 +1,4 @@
 const createError = require('http-errors');
-const Account = require('../account/account.provider').model;
 const { createPayload, generateToken } = require('./auth.utils');
 
 
