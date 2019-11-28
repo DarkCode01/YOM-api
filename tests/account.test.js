@@ -10,6 +10,7 @@ describe('Test Account controllers. [/api/accounts]', () => {
     let data = {
         account: {},
         token: null,
+        refresh: null,
         messageError: {
             statusCode: 400,
             message: 'Bad Request',
@@ -83,7 +84,8 @@ describe('Test Account controllers. [/api/accounts]', () => {
                 expect('products_published' in response.body.data).toBe(true);
 
                 data.account = response.body.data;
-                data.token = AccountFaker.token(data.account);
+                data.token = AccountFaker.token(data.account, 'access');
+                data.refresh = AccountFaker.token(data.account, 'refresh');
             });
     });
 
@@ -105,6 +107,15 @@ describe('Test Account controllers. [/api/accounts]', () => {
                 expect('employed' in response.body.account).toBe(true);
                 expect('products_published' in response.body.account).toBe(true);
             });
+    });
+
+    test('Get info of account by _id with bad token access.', () => {
+        return request(app)
+            .get(`/api/accounts/${data.account._id}`)
+            .set('Accept', 'application/json')
+            .set('Authorization', `JWT ${data.refresh}`)
+            .expect('Content-Type', /json/)
+            .expect(401)
     });
 
     test('Updating Status of account.', () => {
@@ -133,6 +144,22 @@ describe('Test Account controllers. [/api/accounts]', () => {
             .expect(200)
             .then(response => {
                 expect(response.body.account.first_name === first_name).toBe(true);
+            });
+    });
+
+    test('Updating info of account by _id with bad request', () => {
+        return request(app)
+            .patch(`/api/accounts/${data.account._id}`)
+            .set('Accept', 'application/json')
+            .set('Authorization', `JWT ${data.token}`)
+            .send({
+                username: 'na'
+            })
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .then(response => {
+                expect(response.body.error['0'].msg === data.messageError.error['0'].msg);
+                expect(JSON.stringify(response.body) === JSON.stringify(data.messageError.error));
             });
     });
 

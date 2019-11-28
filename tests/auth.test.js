@@ -6,7 +6,8 @@ const db = require('../config/db');
 describe('Test all operation of athuentication. [/api/auth]', () => {
     let data = {
         credentials: {},
-        account: {}
+        account: {},
+        tokens: {}
     }
 
     beforeAll(async () => {
@@ -43,6 +44,63 @@ describe('Test all operation of athuentication. [/api/auth]', () => {
 
                 expect(typeof response.body.refresh).toBe('string');
                 expect(typeof response.body.access).toBe('string');
+
+                data.tokens = {
+                    refresh: response.body.refresh,
+                    access: response.body.access
+                }
+            });
+    });
+
+    test('Refreshing token access with refresh token.', () => {
+        return request(app)
+            .post('/api/auth/refresh')
+            .set('Accept', 'application/json')
+            .send({
+                token: data.tokens.refresh
+            })
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then(response => {
+                expect('access' in response.body).toBe(true);
+                expect(typeof response.body.access).toBe('string');
+            });
+    });
+
+    test('Refreshing token access with bad request.', () => {
+        return request(app)
+            .post('/api/auth/refresh')
+            .set('Accept', 'application/json')
+            .send({
+                token: data.tokens.access
+            })
+            .expect(401)
+    });
+
+    test('Verify token access', () => {
+        return request(app)
+            .post('/api/auth/verify')
+            .set('Accept', 'application/json')
+            .set('Authorization', `JWT ${data.tokens.access}`)
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body.tokenType === 'access').toBe(true);
+                expect(response.body.isValid).toBe(true);
+            });
+    });
+
+
+    test('Verify refresh token', () => {
+        return request(app)
+            .post('/api/auth/verify')
+            .set('Accept', 'application/json')
+            .set('Authorization', `JWT ${data.tokens.refresh}`)
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body.tokenType === 'refresh').toBe(true);
+                expect(response.body.isValid).toBe(true);
             });
     });
 

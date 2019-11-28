@@ -12,7 +12,7 @@ const { upload, limitFiles } = ImageComponent.middlewares;
 
 
 router.get('/products', controllers.getProducts)
-router.get('/products/:id', validators, validate, controllers.getProductByObjectId)
+router.get('/products/:objectID', validators, validate, controllers.getProductByObjectId)
 router.post('/products', passport.authenticate('authenticate', { session: false }), upload.any(), limitFiles, controllers.createProduct)
 router.delete('/products', passport.authenticate('authenticate', { session: false }), controllers.deleteProductByObjectId)
 

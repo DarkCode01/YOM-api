@@ -19,9 +19,9 @@ module.exports = {
 
         return { email, password, data };
     },
-    token: (account) => {
+    token: (account, type) => {
         return AuthComponent.utils.generateToken(
-            AuthComponent.utils.createPayload(account)
+            AuthComponent.utils.createPayload(account, type)
         )
     },
     delete: async (objectID) => {

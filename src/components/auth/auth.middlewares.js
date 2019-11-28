@@ -26,8 +26,6 @@ passport.use('login', new localStrategy(
                 
                 return next(null, account);
             }
-
-            throw new Error();
         } catch(err) {
             return next(createError(401, 'Error not found an account with this data!'));
         }
@@ -40,13 +38,9 @@ passport.use('authenticate', new Strategy(
         secretOrKey: SECRET_KEY_API
     },
     (payload, next) => {
-        try {
-            if (payload.tokenType === 'access') return next(false, payload);
+        if (payload.tokenType === 'access') return next(false, payload);
 
-            return next(createError(401, 'token invalid or expired!'));
-        } catch(err) {
-            return next(createError(500, err.message));
-        }
+        return next(createError(401, 'token invalid or expired!'));
     }
 ));
 
@@ -56,18 +50,16 @@ passport.use('refresh', new Strategy(
         secretOrKey: SECRET_KEY_API
     },
     (payload, next) => {
-        try {
-            if (payload.tokenType !== 'refresh') return next(createError(401, 'token invalid or expired!'));
-
+        if (payload.tokenType === 'refresh') {
             return next(false, {
                 tokenType: payload.type,
                 _id: payload._id,
                 username: payload.username,
                 email: payload.email
             });
-        } catch(err) {
-            return next(createError(500, err.message));
         }
+
+        return next(createError(401));
     }
 ));
 

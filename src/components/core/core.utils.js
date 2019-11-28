@@ -16,7 +16,8 @@ exports.validators = [
 ];
 
 exports.getTemplate = ({ filename }) => {
-    const html = fs.readFileSync(`./src/templates/${filename}.hbs`, 'utf8');
+    const dirProject = process.cwd();
+    const html = fs.readFileSync(`${dirProject}/src/templates/${filename}.hbs`, 'utf8');
 
     return hbs.compile(html)();
 }
