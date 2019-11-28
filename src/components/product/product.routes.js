@@ -11,11 +11,10 @@ const { validators } = CoreComponent.utils;
 const { upload, limitFiles } = ImageComponent.middlewares;
 
 
-// router
-//     .get('/products', controllers.getProducts)
-//     .get('/products/:id', validators, validate, controllers.getProductByObjectId)
-//     .post('/products', passport.authenticate('authenticate', { session: false }), upload.any(), limitFiles, controllers.createProduct)
-//     .delete('/products', passport.authenticate('authenticate', { session: false }), validateObjectId, controllers.deleteProductByObjectId)
+router.get('/products', controllers.getProducts)
+router.get('/products/:id', validators, validate, controllers.getProductByObjectId)
+router.post('/products', passport.authenticate('authenticate', { session: false }), upload.any(), limitFiles, controllers.createProduct)
+router.delete('/products', passport.authenticate('authenticate', { session: false }), controllers.deleteProductByObjectId)
 
 
 module.exports = router;

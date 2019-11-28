@@ -26,7 +26,7 @@ app.use(AuthComponent.middlewares.initialize());
 // routes
 app.use('/api', AuthComponent.routes);
 app.use('/api', AccountComponent.routes);
-// app.use('/api', ProductComponent.routes);
+app.use('/api', ProductComponent.routes);
 app.use('/api/doc', swagger.serve, swagger.setup(openApi));
 
 // Catch of errors

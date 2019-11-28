@@ -57,7 +57,7 @@ describe('Test Product controllers. [/api/products]', () => {
             .set('Authorization', `JWT ${data.token}`)
             .field('name', data.product.name)
             .field('description', data.product.description)
-            .field('price', 100000)
+            .field('price', data.product.price)
             .attach('images', 'tests/data/images/test-image.jpg')
             .expect('Content-Type', /json/)
             .expect(201)
