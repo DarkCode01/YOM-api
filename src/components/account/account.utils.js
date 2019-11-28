@@ -55,7 +55,8 @@ exports.createHashPassword = password => {
  */
 exports.bodyValidatorToUpdate = [
     body('username')
-        .isAlphanumeric()
+        .matches(/^(?=.{4,30}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/)
+        .withMessage('The username is not valid, contain character not permmited.')
         .isLength({ min: 4, max: 30 })
         .withMessage('The characters of username is min: 4, max: 30')
         .optional(),
