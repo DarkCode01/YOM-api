@@ -19,5 +19,6 @@ Cualquier reporte de errores, puedes abrir un `Issues 🐛` en este repo y con g
 
 ## Pull-eros
 
+* [Lea-Reif](https://github.com/Lea-Reif)
 * [Devrax](https://github.com/Devrax)
 * [Samuel De La Cruz](https://github.com/samueldlacruz)
