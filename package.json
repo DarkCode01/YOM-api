@@ -49,7 +49,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "resize-optimize-images": "^1.1.0",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.5",
     "swagger-ui-express": "^4.1.2"
   },
   "devDependencies": {
